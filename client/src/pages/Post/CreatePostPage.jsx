@@ -22,20 +22,22 @@ const CreatePostPage = () => {
             // onSubmit={}
           >
             <input
-              type="email"
+              type="text"
               placeholder="Enter title"
               className="p-2 border border-amber-200 w-full rounded-2xl my-2"
             />
             <input
-              type="password"
+              type="file"
               placeholder="Enter Description"
               className="p-2 border border-amber-200 w-full rounded-2xl my-2"
             />
             <textarea
-              rows={4}
+              rows={6}
               className=" p-2 border border-amber-200 w-full rounded-2xl my-2"
               placeholder="Enter Desc"
-            ></textarea>
+            >
+              Example
+            </textarea>
             <input
               type="submit"
               value="Create"
