@@ -6,6 +6,10 @@ config();
 const app = express();
 const port = process.env.port || 4001
 
+
+// global middleware
+app.use(express.json());
+
 console.log('hello world!');
 
 
