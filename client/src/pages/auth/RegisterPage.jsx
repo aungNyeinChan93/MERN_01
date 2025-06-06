@@ -26,7 +26,7 @@ const RegisterPage = () => {
     if (!response.ok) {
       console.log(`registeration failed!`);
     }
-    const data = response.json();
+    const data = await response.json();
     console.log(data);
   };
 

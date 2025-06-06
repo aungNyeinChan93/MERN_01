@@ -1,0 +1,23 @@
+import User from "../models/User.js";
+
+
+const authController = {
+    register: async (req, res, next) => {
+        try {
+            const { name, email, password } = req.body;
+            const user = await User.create({ name, email, password });
+
+            if (!user) {
+                return next(new Error('register fail!'))
+            }
+            return res.status(201).json({
+                mess: 'register success',
+                result: user
+            })
+        } catch (error) {
+            return next(error)
+        }
+    }
+}
+
+export default authController;
