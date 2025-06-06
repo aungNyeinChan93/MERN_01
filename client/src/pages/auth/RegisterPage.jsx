@@ -5,10 +5,31 @@ const RegisterPage = () => {
   const emailRef = useRef();
   const passwordRef = useRef();
 
-  const registerForm = (e) => {
+  const registerForm = async (e) => {
     e.preventDefault();
     console.log(nameRef.current.value);
+    console.log(import.meta.env.VITE_URL);
+    const response = await fetch(
+      `${import.meta.env.VITE_URL}/api/auth/register`,
+      {
+        method: "POST",
+        body: JSON.stringify({
+          name: nameRef.current.value,
+          email: emailRef.current.value,
+          password: passwordRef.current.value,
+        }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    if (!response.ok) {
+      console.log(`registeration failed!`);
+    }
+    const data = response.json();
+    console.log(data);
   };
+
   return (
     <React.Fragment>
       <section>

@@ -4,9 +4,9 @@ import Banner from "../../components/base/Banner";
 const HomePage = () => {
   return (
     <React.Fragment>
-      <div className="text-red-600 mx-[150px]">
+      <section className="text-red-600 lg:mx-[140px] bg-amber-100 p-4">
         <Banner />
-      </div>
+      </section>
     </React.Fragment>
   );
 };

@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router";
+import NotFound from "../../components/others/NotFound";
 
 const NotFoundPage = () => {
   return (
@@ -26,6 +27,7 @@ const NotFoundPage = () => {
           </div>
         </div>
       </main>
+      {/* <NotFound /> */}
     </React.Fragment>
   );
 };

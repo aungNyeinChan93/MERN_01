@@ -9,6 +9,7 @@ import NotFoundPage from './pages/others/NotFoundPage';
 import DetailPostPage from './pages/Post/DetailPostPage';
 import CreatePostPage from './pages/Post/CreatePostPage';
 import EditPostPage from './pages/Post/EditPostPage';
+import ContactPage from './pages/Contact/ContactPage';
 
 const router = createBrowserRouter([
     {
@@ -18,6 +19,7 @@ const router = createBrowserRouter([
             { path: '/posts/:id', Component: DetailPostPage },
             { path: '/posts/create', Component: CreatePostPage },
             { path: '/posts/edit/:id', Component: EditPostPage },
+            { path: '/contact', Component: ContactPage },
         ]
     },
     {
