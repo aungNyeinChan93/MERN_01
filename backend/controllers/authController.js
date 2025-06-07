@@ -19,19 +19,21 @@ const authController = {
         }
     },
     login: async (req, res, next) => {
-        const { email, password } = req.body;
-
-        const user = await User.findOne({ email }).select(['name', 'email', 'password']).lean();
-
-        if (!user || !(bcrypt.compare(password, user.password))) {
-            res.status(400);
-            return next(new Error('Password is not correct!'))
+        try {
+            const { email, password } = req.body;
+            const user = await User.findOne({ email }).select(['name', 'email', 'password']).lean();
+            if (!user || !(bcrypt.compare(password, user.password))) {
+                res.status(400);
+                return next(new Error('Password is not correct!'))
+            }
+            user.password = ''
+            res.status(200).json({
+                mess: 'success',
+                result: user
+            })
+        } catch (error) {
+            return next(error)
         }
-
-        res.status(200).json({
-            mess: 'success',
-            result: user
-        })
     }
 }
 

@@ -24,6 +24,7 @@ const LoginPage = () => {
     }
     const data = await response.json();
     if (data.mess === "success") {
+      // console.log(data);
       navigate("/");
     }
   };
