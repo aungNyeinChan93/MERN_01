@@ -9,17 +9,17 @@ import connectDB from './connectDB.js';
 config();
 const app = express();
 const port = process.env.port || 4001;
-const db_url = process.env.DB_URL;
+const password = process.env.DB_PASSWORD;
 
 // db connect
-connectDB(db_url, () => {
+connectDB(`mongodb+srv://mrlokidev:${password}@cluster0.amuk1tm.mongodb.net/Blog_01`, () => {
     app.listen(port, () => console.log(`server is running in port ${port}`))
 
 })
 
 // global middleware
+app.use(cors({ credentials: true, origin: 'http://localhost:5173' }))
 app.use(express.json());
-app.use(cors())
 
 
 // routes

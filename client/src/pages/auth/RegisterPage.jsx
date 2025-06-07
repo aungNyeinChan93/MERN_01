@@ -1,14 +1,15 @@
 import React, { useRef } from "react";
+import { useNavigate, redirect } from "react-router";
 
 const RegisterPage = () => {
   const nameRef = useRef();
   const emailRef = useRef();
   const passwordRef = useRef();
 
+  const navigate = useNavigate();
+
   const registerForm = async (e) => {
     e.preventDefault();
-    console.log(nameRef.current.value);
-    console.log(import.meta.env.VITE_URL);
     const response = await fetch(
       `${import.meta.env.VITE_URL}/api/auth/register`,
       {
@@ -27,7 +28,9 @@ const RegisterPage = () => {
       console.log(`registeration failed!`);
     }
     const data = await response.json();
-    console.log(data);
+    if (data?.mess === "success") {
+      navigate("/");
+    }
   };
 
   return (

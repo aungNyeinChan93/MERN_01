@@ -11,7 +11,7 @@ const authController = {
                 return next(new Error('register fail!'))
             }
             return res.status(201).json({
-                mess: 'register success',
+                mess: 'success',
                 result: user
             })
         } catch (error) {
