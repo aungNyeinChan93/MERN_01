@@ -17,6 +17,21 @@ const authController = {
         } catch (error) {
             return next(error)
         }
+    },
+    login: async (req, res, next) => {
+        const { email, password } = req.body;
+
+        const user = await User.findOne({ email }).select(['name', 'email', 'password']).lean();
+
+        if (!user || !(bcrypt.compare(password, user.password))) {
+            res.status(400);
+            return next(new Error('Password is not correct!'))
+        }
+
+        res.status(200).json({
+            mess: 'success',
+            result: user
+        })
     }
 }
 

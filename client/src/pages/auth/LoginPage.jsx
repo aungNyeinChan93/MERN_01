@@ -1,12 +1,31 @@
 import React, { useRef } from "react";
+import { useNavigate } from "react-router";
 // import SampleForm from "../../components/others/SampleForm";
 
 const LoginPage = () => {
+  const navigate = useNavigate();
   const emailRef = useRef();
   const passwordRef = useRef();
 
-  const loginSubmit = (e) => {
+  const loginSubmit = async (e) => {
     e.preventDefault();
+    const response = await fetch(`${import.meta.env.VITE_URL}/api/auth/login`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: emailRef.current.value,
+        password: passwordRef.current.value,
+      }),
+    });
+    if (!response.ok) {
+      console.log(`login fail`);
+    }
+    const data = await response.json();
+    if (data.mess === "success") {
+      navigate("/");
+    }
   };
 
   return (

@@ -29,7 +29,7 @@ const RegisterPage = () => {
     }
     const data = await response.json();
     if (data?.mess === "success") {
-      navigate("/");
+      navigate("/auth/login");
     }
   };
 
