@@ -4,7 +4,6 @@ import cors from 'cors'
 import authRouter from './routes/authRouter.js';
 import errorMiddleware from './middlewares/errorMiddleware.js';
 import connectDB from './connectDB.js';
-import bcrypt from 'bcrypt'
 
 // dotenv config
 config();
@@ -17,6 +16,7 @@ connectDB(`mongodb+srv://mrlokidev:${password}@cluster0.amuk1tm.mongodb.net/Blog
     app.listen(port, () => console.log(`server is running in port ${port}`))
 
 })
+
 
 // global middleware
 app.use(cors({ credentials: true, origin: 'http://localhost:5173' }))

@@ -1,5 +1,6 @@
 import User from "../models/User.js";
-import { bcrypt } from "../utils/helper.js";
+import { bcrypt, JWT } from "../utils/helper.js";
+
 
 const authController = {
     register: async (req, res, next) => {
@@ -26,10 +27,11 @@ const authController = {
                 res.status(400);
                 return next(new Error('Wrong Crendential!'))
             }
+            const token = JWT.genToken(user.email, process.env.SECRECT_KEY);
             user.password = ''
             res.status(200).json({
                 mess: 'success',
-                result: user
+                result: { ...user, token },
             })
         } catch (error) {
             return next(error)
@@ -37,4 +39,6 @@ const authController = {
     }
 }
 
+
 export default authController;
+

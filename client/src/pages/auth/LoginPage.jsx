@@ -27,6 +27,8 @@ const LoginPage = () => {
     }
     const data = await response.json();
     if (data.mess === "success") {
+      localStorage.setItem("auth", JSON.stringify(data.result));
+      // console.log(JSON.parse(localStorage.getItem("auth")).token);
       navigate("/");
     } else {
       console.log(data.error);
