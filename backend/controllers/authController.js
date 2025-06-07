@@ -24,7 +24,7 @@ const authController = {
             const user = await User.findOne({ email }).select(['name', 'email', 'password']).lean();
             if (!user || !(bcrypt.compare(password, user.password))) {
                 res.status(400);
-                return next(new Error('Password is not correct!'))
+                return next(new Error('Wrong Crendential!'))
             }
             user.password = ''
             res.status(200).json({

@@ -1,4 +1,5 @@
 import React, { useRef } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router";
 // import SampleForm from "../../components/others/SampleForm";
 
@@ -6,6 +7,7 @@ const LoginPage = () => {
   const navigate = useNavigate();
   const emailRef = useRef();
   const passwordRef = useRef();
+  const [error, setError] = useState(false);
 
   const loginSubmit = async (e) => {
     e.preventDefault();
@@ -18,14 +20,17 @@ const LoginPage = () => {
         email: emailRef.current.value,
         password: passwordRef.current.value,
       }),
+      credentials: "include",
     });
     if (!response.ok) {
       console.log(`login fail`);
     }
     const data = await response.json();
     if (data.mess === "success") {
-      // console.log(data);
       navigate("/");
+    } else {
+      console.log(data.error);
+      setError(true);
     }
   };
 
@@ -44,6 +49,11 @@ const LoginPage = () => {
               className="p-2 border border-amber-200 w-full rounded-2xl my-2"
               ref={emailRef}
             />
+            {error && (
+              <p className="text-sm text-red-600 px-2 py-1">
+                Wrong Crendential!
+              </p>
+            )}
             <input
               type="password"
               placeholder="Enter Password"
