@@ -4,6 +4,7 @@ import cors from 'cors'
 import authRouter from './routes/authRouter.js';
 import errorMiddleware from './middlewares/errorMiddleware.js';
 import connectDB from './connectDB.js';
+import bcrypt from 'bcrypt'
 
 // dotenv config
 config();
