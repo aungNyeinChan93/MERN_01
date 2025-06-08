@@ -12,7 +12,7 @@ const JWT = {
 }
 
 
-const token = JWT.genToken('aung', "asd123!@");
+const token = JWT.genToken({ name: 'aung', email: 'aung@123' }, "asd123!@");
 console.log(token);
 
 const res = JWT.getToken(token, 'asd123!@');

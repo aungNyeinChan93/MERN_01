@@ -4,9 +4,14 @@ import cors from 'cors'
 import authRouter from './routes/authRouter.js';
 import errorMiddleware from './middlewares/errorMiddleware.js';
 import connectDB from './connectDB.js';
+import cookieParser from 'cookie-parser';
+import testRouter from './routes/testRouter.js';
+import tokenMiddleware from './middlewares/tokenMiddleware.js';
 
 // dotenv config
 config();
+
+// express app
 const app = express();
 const port = process.env.port || 4001;
 const password = process.env.DB_PASSWORD;
@@ -21,10 +26,12 @@ connectDB(`mongodb+srv://mrlokidev:${password}@cluster0.amuk1tm.mongodb.net/Blog
 // global middleware
 app.use(cors({ credentials: true, origin: 'http://localhost:5173' }))
 app.use(express.json());
+app.use(cookieParser())
 
 
 // routes
 app.use('/api/auth/', authRouter);
+app.use('/api/tests', tokenMiddleware, testRouter);
 
 
 // Error handler

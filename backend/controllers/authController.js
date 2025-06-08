@@ -20,6 +20,8 @@ const authController = {
         }
     },
     login: async (req, res, next) => {
+        console.log(req.token);
+
         try {
             const { email, password } = req.body;
             const user = await User.findOne({ email }).select(['name', 'email', 'password']).lean();
@@ -27,7 +29,11 @@ const authController = {
                 res.status(400);
                 return next(new Error('Wrong Crendential!'))
             }
-            const token = JWT.genToken(user.email, process.env.SECRECT_KEY);
+            const token = JWT.genToken({ email: user.email, user_id: user._id }, process.env.SECRECT_KEY);
+            res.cookie('token', token, {
+                maxAge: 1000 * 60 * 60,
+                httpOnly: true
+            })
             user.password = ''
             res.status(200).json({
                 mess: 'success',
