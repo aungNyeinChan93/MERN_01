@@ -24,6 +24,7 @@ const LoginPage = () => {
     });
     if (!response.ok) {
       console.log(`login fail`);
+      setError(true);
     }
     const data = await response.json();
     if (data.mess === "success") {

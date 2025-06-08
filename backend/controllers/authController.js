@@ -20,8 +20,7 @@ const authController = {
         }
     },
     login: async (req, res, next) => {
-        console.log(req.token);
-
+        // console.log(req.token);
         try {
             const { email, password } = req.body;
             const user = await User.findOne({ email }).select(['name', 'email', 'password']).lean();
