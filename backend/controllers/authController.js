@@ -41,6 +41,16 @@ const authController = {
         } catch (error) {
             return next(error)
         }
+    },
+    logout: async (req, res, next) => {
+        const { token } = req.cookies;
+        console.log(token);
+
+        if (token) {
+            res.clearCookie('token');
+            res.status.json({ mess: 'success' })
+        }
+        res.json({})
     }
 }
 

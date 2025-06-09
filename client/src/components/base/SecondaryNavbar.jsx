@@ -8,7 +8,7 @@ const SecondaryNavbar = () => {
   const navigate = useNavigate();
 
   const logout = async () => {
-    await fetch(`${import.meta.env.VITE_URL}/auth/logout`, {
+    await fetch(`${import.meta.env.VITE_URL}/api/auth/logout`, {
       credentials: "include",
       method: "POST",
     });
