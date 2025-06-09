@@ -28,7 +28,7 @@ const authController = {
                 res.status(400);
                 return next(new Error('Wrong Crendential!'))
             }
-            const token = JWT.genToken({ email: user.email, id: user._id }, process.env.SECRECT_KEY);
+            const token = JWT.genToken({ name: user.name, email: user.email, id: user._id }, process.env.SECRECT_KEY);
             res.cookie('token', token, {
                 maxAge: 1000 * 60 * 60,
                 httpOnly: true

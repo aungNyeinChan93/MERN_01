@@ -7,6 +7,7 @@ import connectDB from './connectDB.js';
 import cookieParser from 'cookie-parser';
 import testRouter from './routes/testRouter.js';
 import tokenMiddleware from './middlewares/tokenMiddleware.js';
+import usreInfoRouter from './routes/userInfoRouter.js';
 
 // dotenv config
 config();
@@ -31,7 +32,8 @@ app.use(cookieParser())
 
 // routes
 app.use('/api/auth/', authRouter);
-app.use('/api/tests', tokenMiddleware, testRouter);
+app.use('/api/tests/', tokenMiddleware, testRouter);
+app.use('/api/user-info/', usreInfoRouter);
 
 
 // Error handler
