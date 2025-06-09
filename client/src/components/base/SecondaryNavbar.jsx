@@ -1,10 +1,20 @@
 import React, { useContext } from "react";
-import { Link, NavLink } from "react-router";
+import { Link, NavLink, useNavigate } from "react-router";
 import navLinks from "../../utils/navLinks";
 import { userInfoContext } from "../../contexts/userInfoProvider";
 
 const SecondaryNavbar = () => {
-  const { userInfo } = useContext(userInfoContext);
+  const { userInfo, setUserInfo } = useContext(userInfoContext);
+  const navigate = useNavigate();
+
+  const logout = async () => {
+    await fetch(`${import.meta.env.VITE_URL}/auth/logout`, {
+      credentials: "include",
+      method: "POST",
+    });
+    setUserInfo(null);
+    navigate("/");
+  };
   return (
     <React.Fragment>
       <header className="lg:mx-[140px] flex shadow-md py-4 px-4 sm:px-10 bg-white min-h-[70px] tracking-wide relative z-50">
@@ -85,8 +95,11 @@ const SecondaryNavbar = () => {
               <button className="px-4 py-2 text-sm rounded-full font-medium cursor-pointer tracking-wide text-white border border-blue-600 bg-blue-600 hover:bg-blue-700 transition-all">
                 <Link to={"/posts/create"}>Create Post</Link>
               </button>
-              <button className="px-4 py-2 text-sm rounded-full font-medium cursor-pointer tracking-wide text-slate-900 border border-gray-400 bg-transparent hover:bg-gray-50 transition-all">
-                <Link to={"/auth/login"}>Logout</Link>
+              <button
+                className="px-4 py-2 text-sm rounded-full font-medium cursor-pointer tracking-wide text-slate-900 border border-gray-400 bg-transparent hover:bg-gray-50 transition-all"
+                onClick={logout}
+              >
+                <p>Logout</p>
               </button>
               <span className="flex justify-center items-center text-red-400 text-sm ms-6">
                 {userInfo.name?.toUpperCase()}
