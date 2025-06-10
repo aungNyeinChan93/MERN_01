@@ -1,11 +1,36 @@
-import React from "react";
+import React, { useState } from "react";
 import BackIcon from "../../icons/BackIcon";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 
 const CreatePostPage = () => {
-  const createPost = (e) => {
+  const [title, setTitle] = useState();
+  const [description, setDescription] = useState();
+  const [imageUrl, setImageUrl] = useState();
+
+  const navigate = useNavigate();
+  const createPost = async (e) => {
     e.preventDefault();
-    console.log("create post");
+    try {
+      const formData = new FormData();
+      formData.append("title", title);
+      formData.append("description", description);
+      formData.append("imgaeUrl", imageUrl);
+
+      const response = await fetch(`${import.meta.env.VITE_URL}/`, {
+        method: "POST",
+        credentials: "include",
+        body: formData,
+      });
+      if (!response.ok) {
+        throw new Error("post create fail!");
+      }
+      const post = await response.json();
+      if (post.mess === "success") {
+        navigate("/");
+      }
+    } catch (error) {
+      console.error(error);
+    }
   };
   return (
     <React.Fragment>
@@ -29,16 +54,22 @@ const CreatePostPage = () => {
               type="text"
               placeholder="Enter title"
               className="p-2 border border-amber-200 w-full rounded-2xl my-2"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
             />
             <input
-              type="file"
-              placeholder="Enter Description"
+              type="text"
+              placeholder="Enter image Url"
               className="p-2 border border-amber-200 w-full rounded-2xl my-2"
+              value={imageUrl}
+              onChange={(e) => setImageUrl(e.target.value)}
             />
             <textarea
               rows={6}
               className=" p-2 border border-amber-200 w-full rounded-2xl my-2"
               defaultValue={"Enter desc"}
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
             ></textarea>
             <input
               type="submit"
