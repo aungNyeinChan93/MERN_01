@@ -1,8 +1,13 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import BackIcon from "../../icons/BackIcon";
 import { Link, useNavigate } from "react-router";
+import { userInfoContext } from "../../contexts/userInfoProvider";
 
 const CreatePostPage = () => {
+  const {
+    userInfo: { _id: user_id },
+  } = useContext(userInfoContext);
+
   const [title, setTitle] = useState();
   const [description, setDescription] = useState();
   const [imageUrl, setImageUrl] = useState();
@@ -15,12 +20,16 @@ const CreatePostPage = () => {
       formData.append("title", title);
       formData.append("description", description);
       formData.append("imgaeUrl", imageUrl);
+      formData.append("user_id", user_id);
 
-      const response = await fetch(`${import.meta.env.VITE_URL}/`, {
-        method: "POST",
-        credentials: "include",
-        body: formData,
-      });
+      const response = await fetch(
+        `${import.meta.env.VITE_URL}/api/posts/create`,
+        {
+          method: "POST",
+          credentials: "include",
+          body: formData,
+        }
+      );
       if (!response.ok) {
         throw new Error("post create fail!");
       }
