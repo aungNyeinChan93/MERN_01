@@ -90,7 +90,6 @@ const SecondaryNavbar = () => {
               })}
             </ul>
           </div>
-
           {userInfo ? (
             <div className="flex max-lg:ml-auto space-x-4">
               <button className="px-4 py-2 text-sm rounded-full font-medium cursor-pointer tracking-wide text-white border border-blue-600 bg-blue-600 hover:bg-blue-700 transition-all">
