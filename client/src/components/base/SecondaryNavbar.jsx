@@ -13,6 +13,7 @@ const SecondaryNavbar = () => {
       method: "POST",
     });
     setUserInfo(null);
+    localStorage.removeItem("auth");
     navigate("/");
   };
   return (
