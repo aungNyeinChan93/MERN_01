@@ -19,7 +19,7 @@ const CreatePostPage = () => {
       const formData = new FormData();
       formData.append("title", title);
       formData.append("description", description);
-      formData.append("imgaeUrl", imageUrl);
+      formData.append("imageUrl", imageUrl);
       formData.append("user_id", user_id);
 
       const response = await fetch(

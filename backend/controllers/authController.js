@@ -30,7 +30,7 @@ const authController = {
             }
             const token = JWT.genToken({ name: user.name, email: user.email, id: user._id }, process.env.SECRECT_KEY);
             res.cookie('token', token, {
-                maxAge: 1000 * 60 * 60,
+                maxAge: 1000 * 60 * 360,
                 httpOnly: true
             })
             user.password = ''
