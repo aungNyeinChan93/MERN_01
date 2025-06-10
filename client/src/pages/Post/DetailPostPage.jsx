@@ -4,6 +4,7 @@ import { Link, useParams } from "react-router";
 import BackIcon from "../../icons/BackIcon";
 import { useState } from "react";
 import { useEffect } from "react";
+import { formatISO9075 } from "date-fns";
 
 const DetailPostPage = () => {
   const { id } = useParams();
@@ -38,7 +39,14 @@ const DetailPostPage = () => {
 
   // const product = test_products.filter((p) => p.id == id);
   // const { id: pId, title, description, category, image } = product[0];
-  const { title, description, imageUrl, user_id } = post;
+  const {
+    title,
+    description,
+    imageUrl,
+    user_id: author,
+    _id,
+    createdAt,
+  } = post;
   return (
     <React.Fragment>
       <section className="p-2 bg-amber-100 mx-[140px]">
@@ -50,19 +58,43 @@ const DetailPostPage = () => {
                   {title}
                 </h2>
                 <h4 className="py-2 uppercase text-md text-red-400">
-                  {user_id?.name}
+                  {author?.name}
+                  <span className="ms-2 text-blue-500">
+                    {createdAt &&
+                      formatISO9075(createdAt, { format: "extended" })}
+                  </span>
                 </h4>
                 <p className="mt-4 text-gray-700">{description}</p>
               </div>
-              <Link
-                to={"/posts"}
-                className="inline-block mt-4 w-30 text-center px-4 py-2 bg-green-400 hover:bg-green-600 rounded"
-              >
-                <div className=" flex justify-evenly items-center">
-                  <BackIcon />
-                  <span>Back</span>
-                </div>
-              </Link>
+              <div className=" flex justify-start items-center space-x-2">
+                <Link
+                  to={"/posts"}
+                  className="inline-block mt-4 w-30 text-center px-4 py-2 bg-green-400 hover:bg-green-600 rounded"
+                >
+                  <div className=" flex justify-evenly items-center">
+                    <BackIcon />
+                    <span>Back</span>
+                  </div>
+                </Link>
+                <Link
+                  to={`/posts/edit/${_id}`}
+                  className="inline-block mt-4 w-30 text-center px-4 py-2 bg-amber-300 hover:bg-amber-400 rounded"
+                >
+                  <div className=" flex justify-evenly items-center">
+                    <BackIcon />
+                    <span>Edit</span>
+                  </div>
+                </Link>
+                <Link
+                  to={"/posts"}
+                  className="inline-block mt-4 w-30 text-center px-4 py-2 bg-green-400 hover:bg-green-600 rounded"
+                >
+                  <div className=" flex justify-evenly items-center">
+                    <BackIcon />
+                    <span>Back</span>
+                  </div>
+                </Link>
+              </div>
             </div>
 
             <div>
