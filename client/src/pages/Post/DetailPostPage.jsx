@@ -1,13 +1,44 @@
 import React from "react";
 import { Link, useParams } from "react-router";
-import { test_products } from "../../tests/test_product";
+// import { test_products } from "../../tests/test_product";
 import BackIcon from "../../icons/BackIcon";
+import { useState } from "react";
+import { useEffect } from "react";
 
 const DetailPostPage = () => {
   const { id } = useParams();
-  const product = test_products.filter((p) => p.id == id);
-  const { id: pId, title, description, category, image } = product[0];
 
+  const [post, setPost] = useState({});
+
+  const getPost = async () => {
+    try {
+      const response = await fetch(
+        `${import.meta.env.VITE_URL}/api/posts/${id}`,
+        {
+          method: "GET",
+          credentials: "include",
+        }
+      );
+      if (!response.ok) {
+        throw new Error("Post not found!");
+      }
+      const postData = await response.json();
+      if (postData.mess === "success") {
+        setPost(postData.result);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  // console.log(post);
+
+  useEffect(() => {
+    getPost();
+  }, []);
+
+  // const product = test_products.filter((p) => p.id == id);
+  // const { id: pId, title, description, category, image } = product[0];
+  const { title, description, imageUrl, user_id } = post;
   return (
     <React.Fragment>
       <section className="p-2 bg-amber-100 mx-[140px]">
@@ -19,7 +50,7 @@ const DetailPostPage = () => {
                   {title}
                 </h2>
                 <h4 className="py-2 uppercase text-md text-red-400">
-                  {category}
+                  {user_id?.name}
                 </h4>
                 <p className="mt-4 text-gray-700">{description}</p>
               </div>
@@ -35,7 +66,7 @@ const DetailPostPage = () => {
             </div>
 
             <div>
-              <img src={image} className="rounded" alt="" />
+              <img src={imageUrl} className="rounded" alt="" />
             </div>
           </div>
         </div>

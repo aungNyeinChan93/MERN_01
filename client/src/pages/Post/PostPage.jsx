@@ -4,6 +4,7 @@ import { test_products } from "../../tests/test_product";
 
 const PostPage = () => {
   const [posts, setPosts] = useState([]);
+  // console.log(posts);
 
   const getPostsData = async () => {
     try {
@@ -30,7 +31,7 @@ const PostPage = () => {
       <section className="mx-10 lg:mx-[140px] min-h-screen bg-amber-100 ">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-2 my-2">
           {posts?.map((post) => {
-            return <SampleCard key={post.id} {...post} />;
+            return <SampleCard key={post._id} {...post} />;
           })}
         </div>
       </section>

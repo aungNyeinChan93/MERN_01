@@ -29,8 +29,8 @@ const EditPostPage = () => {
               className="p-2 border border-amber-200 w-full rounded-2xl my-2"
             />
             <input
-              type="password"
-              placeholder="Enter Description"
+              type="text"
+              placeholder="Enter imageUrl"
               className="p-2 border border-amber-200 w-full rounded-2xl my-2"
             />
             <textarea
