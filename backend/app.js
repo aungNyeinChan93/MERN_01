@@ -41,7 +41,7 @@ app.use(upload.none())
 app.use('/api/auth/', authRouter);
 app.use('/api/tests/', tokenMiddleware, testRouter);
 app.use('/api/user-info/', usreInfoRouter);
-app.use('/api/posts/', postRouter)
+app.use('/api/posts', postRouter)
 
 
 // Error handler

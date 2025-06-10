@@ -3,6 +3,6 @@ import postController from '../controllers/postController.js';
 
 const postRouter = Router();
 
-postRouter.post('/create', postController.create)
 postRouter.get('/', postController.allPosts)
+postRouter.post('/create', postController.create)
 export default postRouter;

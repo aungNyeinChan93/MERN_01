@@ -35,7 +35,7 @@ const CreatePostPage = () => {
       }
       const post = await response.json();
       if (post.mess === "success") {
-        navigate("/");
+        navigate("/posts");
       }
     } catch (error) {
       console.error(error);

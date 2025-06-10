@@ -24,11 +24,13 @@ const postController = {
     },
     allPosts: async (req, res, next) => {
         try {
-            const posts = await PostModel.find().lean();
+            // res.json({ mess: 'success', result: 'ok!' })
+            const posts = await PostModel.find();
+
             if (!posts) {
                 return next(new Error('post not found!'))
             }
-            res.status(400).json({
+            res.status(200).json({
                 mess: 'success',
                 result: posts
             })

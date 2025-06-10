@@ -1,11 +1,11 @@
 import React from "react";
 import { Link } from "react-router";
 
-const SampleCard = ({ id, title, description, image }) => {
+const SampleCard = ({ id, title, description, imageUrl }) => {
   return (
     <React.Fragment>
       <article className="overflow-hidden rounded-lg border border-gray-100 bg-white shadow-xs">
-        <img alt="" src={image} className="h-56 w-full object-cover" />
+        <img alt="" src={imageUrl} className="h-56 w-full object-cover" />
 
         <div className="p-4 sm:p-6">
           <a href="#">
