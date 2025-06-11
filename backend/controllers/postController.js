@@ -81,6 +81,24 @@ const postController = {
         } catch (error) {
             return next(error)
         }
+    },
+    dropPost: async (req, res, next) => {
+        try {
+            if (req.auth) {
+                const { id } = req.params;
+                const dropPost = await PostModel.findByIdAndDelete(id, { projection: { title: 1 } });
+                if (!dropPost) {
+                    return next(new Error('delete fail!'))
+                };
+                return res.status(200).json({
+                    mess: 'success',
+                    result: dropPost
+                })
+            }
+            return res.status(401).json({})
+        } catch (error) {
+            return next(error)
+        }
     }
 
 

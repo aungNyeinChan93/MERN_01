@@ -41,6 +41,28 @@ const DetailPostPage = () => {
     getPost();
   }, []);
 
+  const deletePost = async (e) => {
+    try {
+      const response = await fetch(
+        `${import.meta.env.VITE_URL}/api/posts/${id}`,
+        {
+          method: "DELETE",
+          credentials: "include",
+        }
+      );
+      if (!response.ok) {
+        throw new Error("fail delete");
+      }
+      const deletedPostData = await response.json();
+      if (deletedPostData.mess === "success") {
+        console.log(`${deletedPostData.result.title} was deleted!`); //noti alert
+        return navigate("/posts");
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   // const product = test_products.filter((p) => p.id == id);
   // const { id: pId, title, description, category, image } = product[0];
   const {
@@ -89,15 +111,15 @@ const DetailPostPage = () => {
                     <span>Edit</span>
                   </div>
                 </Link>
-                <Link
-                  to={"/posts"}
-                  className="inline-block mt-4 w-30 text-center px-4 py-2 bg-red-400 hover:bg-red-500 rounded"
+                <button
+                  onClick={deletePost}
+                  className="inline-block mt-4 w-30 text-center px-4 py-2 bg-red-400 hover:bg-red-500 rounded cursor-pointer"
                 >
                   <div className=" flex justify-evenly items-center">
                     <BackIcon />
                     <span>Delete</span>
                   </div>
-                </Link>
+                </button>
               </div>
             </div>
 

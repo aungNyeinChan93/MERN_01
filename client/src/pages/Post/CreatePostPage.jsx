@@ -8,9 +8,9 @@ const CreatePostPage = () => {
     userInfo: { _id: user_id },
   } = useContext(userInfoContext);
 
-  const [title, setTitle] = useState();
-  const [description, setDescription] = useState();
-  const [imageUrl, setImageUrl] = useState();
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [imageUrl, setImageUrl] = useState("");
 
   const navigate = useNavigate();
   const createPost = async (e) => {
@@ -76,7 +76,8 @@ const CreatePostPage = () => {
             <textarea
               rows={6}
               className=" p-2 border border-amber-200 w-full rounded-2xl my-2"
-              defaultValue={"Enter desc"}
+              // defaultValue={"Enter desc"}
+              placeholder="Enter Desc"
               value={description}
               onChange={(e) => setDescription(e.target.value)}
             ></textarea>

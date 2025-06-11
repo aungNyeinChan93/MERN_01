@@ -7,7 +7,8 @@ const postRouter = Router();
 postRouter.get('/', postController.allPosts)
 postRouter.post('/create', postController.create);
 postRouter.get('/:id', tokenMiddleware, postController.getPost);
-postRouter.put('/edit/:id', tokenMiddleware, postController.modifyPost)
+postRouter.put('/edit/:id', tokenMiddleware, postController.modifyPost);
+postRouter.delete('/:id', tokenMiddleware, postController.dropPost)
 
 
 export default postRouter;
