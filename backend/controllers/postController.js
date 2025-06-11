@@ -46,11 +46,11 @@ const postController = {
 
             const post = await PostModel.findById(id).populate('user_id', ['name', 'email']).lean();
 
-            const auth_email = req.auth.email;
+            // const auth_email = req.auth.email;
+            // if (post.user_id.email !== auth_email) {
+            //     return res.status(403).json({})
+            // }
 
-            if (post.user_id.email !== auth_email) {
-                return res.status(403).json({})
-            }
             if (!post) {
                 return next(new Error('Post not Found!'))
             };
@@ -70,7 +70,7 @@ const postController = {
             }
             const { id } = req.params;
             const { title, description, imageUrl } = req.body;
-            const updatePost = await PostModel.findByIdAndUpdate(id, { title, description, imageUrl }, { new: true, lean: true });
+            const updatePost = await PostModel.findByIdAndUpdate(id, { title, description, imageUrl }, { new: true, lean: true })
             if (!updatePost) {
                 return next(new Error('update fail!'))
             };

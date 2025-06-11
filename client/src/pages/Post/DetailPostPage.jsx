@@ -5,8 +5,13 @@ import BackIcon from "../../icons/BackIcon";
 import { useState } from "react";
 import { useEffect } from "react";
 import { formatISO9075 } from "date-fns";
+import { useContext } from "react";
+import { userInfoContext } from "../../contexts/userInfoProvider";
 
 const DetailPostPage = () => {
+  const { userInfo, setUserInfo } = useContext(userInfoContext);
+  console.log(userInfo);
+
   const navigate = useNavigate();
   const { id } = useParams();
 
@@ -102,24 +107,34 @@ const DetailPostPage = () => {
                     <span>Back</span>
                   </div>
                 </Link>
-                <Link
-                  to={`/posts/edit/${_id}`}
-                  className="inline-block mt-4 w-30 text-center px-4 py-2 bg-amber-300 hover:bg-amber-400 rounded"
-                >
-                  <div className=" flex justify-evenly items-center">
-                    <BackIcon />
-                    <span>Edit</span>
-                  </div>
-                </Link>
-                <button
-                  onClick={deletePost}
-                  className="inline-block mt-4 w-30 text-center px-4 py-2 bg-red-400 hover:bg-red-500 rounded cursor-pointer"
-                >
-                  <div className=" flex justify-evenly items-center">
-                    <BackIcon />
-                    <span>Delete</span>
-                  </div>
-                </button>
+
+                {userInfo?._id === author?._id && (
+                  <>
+                    <Link
+                      to={`/posts/edit/${_id}`}
+                      className="inline-block mt-4 w-30 text-center px-4 py-2 bg-amber-300 hover:bg-amber-400 rounded"
+                    >
+                      <div className=" flex justify-evenly items-center">
+                        <BackIcon />
+                        <span>Edit </span>
+                      </div>
+                    </Link>
+                  </>
+                )}
+
+                {userInfo?._id === author?._id && (
+                  <>
+                    <button
+                      onClick={deletePost}
+                      className="inline-block mt-4 w-30 text-center px-4 py-2 bg-red-400 hover:bg-red-500 rounded cursor-pointer"
+                    >
+                      <div className=" flex justify-evenly items-center">
+                        <BackIcon />
+                        <span>Delete</span>
+                      </div>
+                    </button>
+                  </>
+                )}
               </div>
             </div>
 

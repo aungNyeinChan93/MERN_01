@@ -9,6 +9,7 @@ const authController = {
             const hashPassword = bcrypt.hash(password, 10);
             const user = await User.create({ name, email, password: hashPassword });
             if (!user) {
+                res.status(400)
                 return next(new Error('register fail!'))
             }
             return res.status(201).json({
@@ -44,11 +45,11 @@ const authController = {
     },
     logout: async (req, res, next) => {
         const { token } = req.cookies;
-        console.log(token);
+        // console.log(token);
 
         if (token) {
             res.clearCookie('token');
-            res.status.json({ mess: 'success' })
+            res.status(200).json({ mess: 'success' })
         }
         res.json({})
     }

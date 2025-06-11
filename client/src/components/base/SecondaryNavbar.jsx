@@ -75,16 +75,20 @@ const SecondaryNavbar = () => {
                     key={nl.name}
                     className="max-lg:border-b max-lg:border-gray-300 max-lg:py-3 px-3"
                   >
-                    <NavLink
-                      to={nl.path}
-                      className={({ isActive }) =>
-                        isActive
-                          ? "hover:text-blue-700 !text-red-700 block font-medium text-[14px]"
-                          : "hover:text-blue-700 text-blue-700 block font-medium text-[14px]"
-                      }
-                    >
-                      {nl.name.toUpperCase()}
-                    </NavLink>
+                    {userInfo && (
+                      <>
+                        <NavLink
+                          to={nl.path}
+                          className={({ isActive }) =>
+                            isActive
+                              ? "hover:text-blue-700 !text-red-700 block font-medium text-[14px]"
+                              : "hover:text-blue-700 text-blue-700 block font-medium text-[14px]"
+                          }
+                        >
+                          {nl.name.toUpperCase()}
+                        </NavLink>
+                      </>
+                    )}
                   </li>
                 );
               })}
