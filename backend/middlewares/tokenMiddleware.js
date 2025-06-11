@@ -16,7 +16,7 @@ const tokenMiddleware = async (req, res, next) => {
     const { token } = req.cookies;
     if (token) {
         const auth = JWT.getToken(token, process.env.SECRECT_KEY);
-        console.log(auth);
+        // console.log(auth);
         req.auth = auth
     }
     next();

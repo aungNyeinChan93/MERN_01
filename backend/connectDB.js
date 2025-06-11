@@ -7,7 +7,6 @@ const connectDB = async (url, cb) => {
         cb();
     } catch (error) {
         console.error("Failed to connect to DB:", error);
-        cb(error);
     }
 }
 

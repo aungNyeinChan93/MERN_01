@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, useParams } from "react-router";
+import { Link, useNavigate, useParams } from "react-router";
 // import { test_products } from "../../tests/test_product";
 import BackIcon from "../../icons/BackIcon";
 import { useState } from "react";
@@ -7,6 +7,7 @@ import { useEffect } from "react";
 import { formatISO9075 } from "date-fns";
 
 const DetailPostPage = () => {
+  const navigate = useNavigate();
   const { id } = useParams();
 
   const [post, setPost] = useState({});
@@ -21,6 +22,9 @@ const DetailPostPage = () => {
         }
       );
       if (!response.ok) {
+        if (response.status == 403) {
+          return navigate("/posts");
+        }
         throw new Error("Post not found!");
       }
       const postData = await response.json();
@@ -87,11 +91,11 @@ const DetailPostPage = () => {
                 </Link>
                 <Link
                   to={"/posts"}
-                  className="inline-block mt-4 w-30 text-center px-4 py-2 bg-green-400 hover:bg-green-600 rounded"
+                  className="inline-block mt-4 w-30 text-center px-4 py-2 bg-red-400 hover:bg-red-500 rounded"
                 >
                   <div className=" flex justify-evenly items-center">
                     <BackIcon />
-                    <span>Back</span>
+                    <span>Delete</span>
                   </div>
                 </Link>
               </div>

@@ -43,7 +43,14 @@ const postController = {
                 return next(new Error('user is not authourize!'))
             }
             const { id } = req.params;
+
             const post = await PostModel.findById(id).populate('user_id', ['name', 'email']).lean();
+
+            const auth_email = req.auth.email;
+
+            if (post.user_id.email !== auth_email) {
+                return res.status(403).json({})
+            }
             if (!post) {
                 return next(new Error('Post not Found!'))
             };
@@ -54,7 +61,29 @@ const postController = {
         } catch (error) {
             return next(error)
         }
+    },
+    modifyPost: async (req, res, next) => {
+        try {
+            if (!req.auth) {
+                res.status(401)
+                return next(new Error('user is not authorize'))
+            }
+            const { id } = req.params;
+            const { title, description, imageUrl } = req.body;
+            const updatePost = await PostModel.findByIdAndUpdate(id, { title, description, imageUrl }, { new: true, lean: true });
+            if (!updatePost) {
+                return next(new Error('update fail!'))
+            };
+            return res.status(200).json({
+                mess: 'success',
+                result: updatePost
+            })
+        } catch (error) {
+            return next(error)
+        }
     }
+
+
 
 }
 

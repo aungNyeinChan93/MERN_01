@@ -10,7 +10,7 @@ const SampleCard = ({
 }) => {
   return (
     <React.Fragment>
-      <article className="overflow-hidden rounded-lg border border-gray-100 bg-white shadow-xs">
+      <article className="overflow-hidden rounded-lg border border-gray-100 bg-white shadow-xs hover:shadow-xl transition-shadow">
         <img alt="" src={imageUrl} className="h-56 w-full object-cover" />
 
         <div className="p-4 sm:p-6">

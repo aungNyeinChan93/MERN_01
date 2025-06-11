@@ -26,7 +26,6 @@ const password = process.env.DB_PASSWORD;
 // db connect
 connectDB(`mongodb+srv://mrlokidev:${password}@cluster0.amuk1tm.mongodb.net/Blog_01`, () => {
     app.listen(port, () => console.log(`server is running in port ${port}`))
-
 })
 
 
