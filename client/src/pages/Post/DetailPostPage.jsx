@@ -70,6 +70,7 @@ const DetailPostPage = () => {
 
   // const product = test_products.filter((p) => p.id == id);
   // const { id: pId, title, description, category, image } = product[0];
+
   const {
     title,
     description,

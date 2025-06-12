@@ -4,9 +4,8 @@ import { Link, useNavigate } from "react-router";
 import { userInfoContext } from "../../contexts/userInfoProvider";
 
 const CreatePostPage = () => {
-  const {
-    userInfo: { _id: user_id },
-  } = useContext(userInfoContext);
+  const { userInfo } = useContext(userInfoContext);
+  const user_id = userInfo?._id;
 
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -31,6 +30,9 @@ const CreatePostPage = () => {
         }
       );
       if (!response.ok) {
+        if (response.status === 401) {
+          return navigate("/");
+        }
         throw new Error("post create fail!");
       }
       const post = await response.json();

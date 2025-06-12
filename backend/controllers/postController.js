@@ -16,7 +16,8 @@ const postController = {
                     result: post
                 })
             } else {
-                return next(new Error('user does not authorize'))
+                res.status(401).json({});
+                // return next(new Error('user does not authorize'))
             }
         } catch (error) {
             return next(error)
@@ -64,12 +65,23 @@ const postController = {
     },
     modifyPost: async (req, res, next) => {
         try {
+            // check login
             if (!req.auth) {
                 res.status(401)
                 return next(new Error('user is not authorize'))
             }
             const { id } = req.params;
             const { title, description, imageUrl } = req.body;
+
+
+            const oldPostDoc = await PostModel.findById(id).populate('user_id', ['name', 'email']).lean();
+
+            // check owner post
+            if (oldPostDoc.user_id.email != req.auth.email && oldPostDoc.user_id._id.toString() !== req.auth.id) {
+                return res.status(401).json({})
+            }
+
+            // update post
             const updatePost = await PostModel.findByIdAndUpdate(id, { title, description, imageUrl }, { new: true, lean: true })
             if (!updatePost) {
                 return next(new Error('update fail!'))

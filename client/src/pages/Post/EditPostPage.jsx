@@ -22,7 +22,7 @@ const EditPostPage = () => {
         }
       );
       if (!response.ok) {
-        if (response.status === 403) {
+        if (response.status === 401) {
           return navigate("/posts");
         }
         throw new Error("Post not Found!");
@@ -60,6 +60,9 @@ const EditPostPage = () => {
         }
       );
       if (!response.ok) {
+        if (response.status === 401) {
+          return navigate("/posts");
+        }
         throw new Error(response.status);
       }
       const postData = await response.json();

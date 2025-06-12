@@ -1,6 +1,7 @@
 import express from 'express';
 import { config } from 'dotenv'
 import cors from 'cors'
+import multer from 'multer';
 import authRouter from './routes/authRouter.js';
 import errorMiddleware from './middlewares/errorMiddleware.js';
 import connectDB from './connectDB.js';
@@ -9,7 +10,6 @@ import testRouter from './routes/testRouter.js';
 import tokenMiddleware from './middlewares/tokenMiddleware.js';
 import usreInfoRouter from './routes/userInfoRouter.js';
 import postRouter from './routes/postRouter.js';
-import multer from 'multer';
 
 
 // config multer

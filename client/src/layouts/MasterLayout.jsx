@@ -6,6 +6,7 @@ import { userInfoContext } from "../contexts/userInfoProvider";
 
 const MasterLayout = () => {
   const { userInfo, setUserInfo } = useContext(userInfoContext);
+
   const getUserInfo = async () => {
     try {
       const response = await fetch(
@@ -26,6 +27,7 @@ const MasterLayout = () => {
   useEffect(() => {
     getUserInfo();
   }, []);
+
   return (
     <React.Fragment>
       {/* <Navbar /> */}

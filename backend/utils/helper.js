@@ -1,6 +1,7 @@
 import { compareSync, genSaltSync, hashSync } from 'bcrypt'
 import jwt from 'jsonwebtoken';
 
+
 export const bcrypt = {
     hash: (plain, salt) => hashSync(plain, genSaltSync(salt)),
     compare: (plainStr, hashStr) => compareSync(plainStr, hashStr)
