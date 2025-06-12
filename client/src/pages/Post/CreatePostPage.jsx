@@ -7,10 +7,6 @@ const CreatePostPage = () => {
   const { userInfo } = useContext(userInfoContext);
   const user_id = userInfo?._id;
 
-  // loderData
-  const { auth } = useLoaderData();
-  console.log(auth.name);
-
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [imageUrl, setImageUrl] = useState("");

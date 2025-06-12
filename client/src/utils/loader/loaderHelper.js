@@ -1,3 +1,4 @@
+import { redirect } from "react-router";
 
 export const checkLogin = async () => {
   const response = await fetch(`${import.meta.env.VITE_URL}/api/user-info`, {
@@ -6,8 +7,8 @@ export const checkLogin = async () => {
   });
 
   if (!response.ok) {
-    window.location.href = '/auth/login';
-    return;
+    // window.location.href = '/auth/login';
+    return redirect('/auth/login')
   }
 
   const { result: auth } = await response.json();

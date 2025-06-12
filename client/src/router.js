@@ -15,11 +15,11 @@ import { checkLogin } from './utils/loader/loaderHelper'
 
 const router = createBrowserRouter([
     {
-        path: '/', Component: MasterLayout, children: [
-            { index: true, Component: HomePage },
+        path: '/', Component: MasterLayout, loader: checkLogin, children: [
+            { index: true, Component: HomePage, },
             { path: '/posts', Component: PostPage },
             { path: '/posts/:id', Component: DetailPostPage },
-            { path: '/posts/create', Component: CreatePostPage, loader: checkLogin },
+            { path: '/posts/create', Component: CreatePostPage, },
             { path: '/posts/edit/:id', Component: EditPostPage },
             { path: '/contact', Component: ContactPage },
         ]
