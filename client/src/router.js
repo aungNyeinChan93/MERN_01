@@ -10,6 +10,8 @@ import DetailPostPage from './pages/Post/DetailPostPage';
 import CreatePostPage from './pages/Post/CreatePostPage';
 import EditPostPage from './pages/Post/EditPostPage';
 import ContactPage from './pages/Contact/ContactPage';
+import { checkLogin } from './utils/loader/loaderHelper'
+
 
 const router = createBrowserRouter([
     {
@@ -17,7 +19,7 @@ const router = createBrowserRouter([
             { index: true, Component: HomePage },
             { path: '/posts', Component: PostPage },
             { path: '/posts/:id', Component: DetailPostPage },
-            { path: '/posts/create', Component: CreatePostPage },
+            { path: '/posts/create', Component: CreatePostPage, loader: checkLogin },
             { path: '/posts/edit/:id', Component: EditPostPage },
             { path: '/contact', Component: ContactPage },
         ]

@@ -65,14 +65,14 @@ const postController = {
     },
     modifyPost: async (req, res, next) => {
         try {
+            const { id } = req.params;
+            const { title, description, imageUrl } = req.body;
+
             // check login
             if (!req.auth) {
                 res.status(401)
                 return next(new Error('user is not authorize'))
             }
-            const { id } = req.params;
-            const { title, description, imageUrl } = req.body;
-
 
             const oldPostDoc = await PostModel.findById(id).populate('user_id', ['name', 'email']).lean();
 

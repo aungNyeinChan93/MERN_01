@@ -6,7 +6,7 @@ const usreInfoRouter = Router();
 usreInfoRouter.get('/', async (req, res, next) => {
     const { token } = req.cookies;
     if (!token) {
-        return res.json({});
+        return res.status(400).json({});
     }
     const userInfo = JWT.getToken(token, process.env.SECRECT_KEY);
     const auth = await User.findById(userInfo.id, { password: false, __v: false }).lean();

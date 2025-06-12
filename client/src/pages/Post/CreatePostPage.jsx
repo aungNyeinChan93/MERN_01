@@ -1,11 +1,15 @@
 import React, { useContext, useState } from "react";
 import BackIcon from "../../icons/BackIcon";
-import { Link, useNavigate } from "react-router";
+import { Link, useLoaderData, useNavigate } from "react-router";
 import { userInfoContext } from "../../contexts/userInfoProvider";
 
 const CreatePostPage = () => {
   const { userInfo } = useContext(userInfoContext);
   const user_id = userInfo?._id;
+
+  // loderData
+  const { auth } = useLoaderData();
+  console.log(auth.name);
 
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
